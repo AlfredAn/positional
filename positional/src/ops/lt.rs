@@ -4,6 +4,12 @@ pub trait Lt<T> {
     type Lt: Bool;
 }
 
+pub trait NotLt<T>: Lt<T, Lt = False> {}
+pub trait IsLt<T>: Lt<T, Lt = True> {}
+
+impl<T1, T2> NotLt<T2> for T1 where T1: Lt<T2, Lt = False> {}
+impl<T1, T2> IsLt<T2> for T1 where T1: Lt<T2, Lt = True> {}
+
 pub const fn lt<T1, T2>() -> bool
 where
     T1: Lt<T2>,
@@ -29,12 +35,6 @@ where
 {
     type Lt = <T1 as Lt<T2>>::Lt;
 }
-
-pub(super) trait NotLt<T>: Lt<T, Lt = False> {}
-pub(super) trait IsLt<T>: Lt<T, Lt = True> {}
-
-impl<T1, T2> NotLt<T2> for T1 where T1: Lt<T2, Lt = False> {}
-impl<T1, T2> IsLt<T2> for T1 where T1: Lt<T2, Lt = True> {}
 
 const _: () = const {
     use positional_macro::peano as p;

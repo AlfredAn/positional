@@ -3,19 +3,19 @@
 extern crate self as positional;
 
 mod bool;
+mod zero;
 mod ops;
+mod peano;
+mod pos;
 
 pub use bool::*;
+pub use zero::*;
 pub use ops::*;
+pub use peano::*;
+pub use pos::*;
 
 pub mod prelude {
     pub use super::*;
 }
 
 pub struct Zero;
-
-/// Peano integer.
-pub struct Successor<T>(std::marker::PhantomData<T>);
-
-/// Integer in a positional numbering system.
-pub struct Int<H, T>(std::marker::PhantomData<(H, T)>);

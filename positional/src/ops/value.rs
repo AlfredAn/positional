@@ -15,6 +15,16 @@ where
     const VALUE: u64 = T::VALUE + 1;
 }
 
+impl<R, H, T> Value for Int<R, H, T>
+where
+    Self: PosInt,
+    R: Value,
+    H: Value,
+    T: Value,
+{
+    const VALUE: u64 = H::VALUE + R::VALUE * T::VALUE;
+}
+
 const _: () = const {
     use positional_macro::peano as p;
     assert!(<p!(0)>::VALUE == 0);
