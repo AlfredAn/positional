@@ -1,4 +1,10 @@
-use crate::{Difference, Subtract, Zero, equal, peano::Successor};
+use crate::prelude::*;
+
+pub trait Subtract<T> {
+    type Difference;
+}
+
+pub type Difference<T1, T2> = <T1 as Subtract<T2>>::Difference;
 
 impl Subtract<Zero> for Zero {
     type Difference = Zero;

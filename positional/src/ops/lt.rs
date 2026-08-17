@@ -1,4 +1,15 @@
-use crate::{False, Lt, True, Zero, lt, peano::Successor};
+use crate::prelude::*;
+
+pub trait Lt<T> {
+    type Lt: Bool;
+}
+
+pub const fn lt<T1, T2>() -> bool
+where
+    T1: Lt<T2>,
+{
+    <T1 as Lt<T2>>::Lt::VALUE
+}
 
 impl Lt<Zero> for Zero {
     type Lt = False;

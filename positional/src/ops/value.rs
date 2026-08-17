@@ -1,4 +1,8 @@
-use crate::{Value, Zero, peano::Successor};
+use crate::prelude::*;
+
+pub trait Value {
+    const VALUE: u64;
+}
 
 impl Value for Zero {
     const VALUE: u64 = 0;

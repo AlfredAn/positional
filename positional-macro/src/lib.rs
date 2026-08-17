@@ -18,7 +18,7 @@ fn peano_impl(input: LitInt) -> syn::Result<TokenStream> {
 
     for _ in 0..int {
         res = quote! {
-            ::positional::peano::Successor<#res>
+            ::positional::Successor<#res>
         };
     }
 

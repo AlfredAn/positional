@@ -1,4 +1,15 @@
-use crate::{Equal, False, True, Zero, equal, peano::Successor};
+use crate::prelude::*;
+
+pub trait Equal<T> {
+    type Equal: Bool;
+}
+
+pub const fn equal<T1, T2>() -> bool
+where
+    T1: Equal<T2>,
+{
+    <T1 as Equal<T2>>::Equal::VALUE
+}
 
 impl Equal<Zero> for Zero {
     type Equal = True;
