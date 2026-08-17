@@ -14,7 +14,7 @@ pub fn peano(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
 
 fn peano_impl(input: LitInt) -> syn::Result<TokenStream> {
     let int = input.base10_parse::<u16>()?;
-    let mut res = quote! { ::positional::peano::Zero };
+    let mut res = quote! { ::positional::Zero };
 
     for _ in 0..int {
         res = quote! {

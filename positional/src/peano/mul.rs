@@ -1,14 +1,4 @@
-use crate::peano::{
-    Successor, Zero,
-    add::{Add, Sum},
-    eq::equal,
-};
-
-pub trait Multiply<T> {
-    type Product;
-}
-
-pub type Product<T1, T2> = <T1 as Multiply<T2>>::Product;
+use crate::{Add, Multiply, Product, Sum, Zero, equal, peano::Successor};
 
 impl Multiply<Zero> for Zero {
     type Product = Zero;

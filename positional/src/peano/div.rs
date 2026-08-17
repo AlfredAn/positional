@@ -1,20 +1,10 @@
 use crate::{
-    bool::{False, True},
+    Difference, Divide, False, Lt, Quotient, Remainder, Subtract, True, Zero, equal,
     peano::{
-        Successor, Zero,
-        cmp::{IsLt, Lt, NotLt},
-        eq::equal,
-        sub::{Difference, Subtract},
+        Successor,
+        cmp::{IsLt, NotLt},
     },
 };
-
-pub trait Divide<T> {
-    type Quotient;
-    type Remainder;
-}
-
-pub type Quotient<T1, T2> = <T1 as Divide<T2>>::Quotient;
-pub type Remainder<T1, T2> = <T1 as Divide<T2>>::Remainder;
 
 impl<T1, T2> Divide<Successor<T2>> for T1
 where

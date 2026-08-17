@@ -1,10 +1,4 @@
-use crate::peano::{Successor, Zero, eq::equal};
-
-pub trait Add<T> {
-    type Sum;
-}
-
-pub type Sum<T1, T2> = <T1 as Add<T2>>::Sum;
+use crate::{Add, Sum, Zero, equal, peano::Successor};
 
 impl Add<Zero> for Zero {
     type Sum = Zero;

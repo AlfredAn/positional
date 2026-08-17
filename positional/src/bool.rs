@@ -1,6 +1,4 @@
-pub trait Bool {
-    const VALUE: bool;
-}
+use crate::Bool;
 
 pub struct False;
 pub struct True;

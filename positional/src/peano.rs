@@ -6,6 +6,4 @@ mod mul;
 mod sub;
 mod value;
 
-pub struct Zero;
-
 pub struct Successor<T>(std::marker::PhantomData<T>);

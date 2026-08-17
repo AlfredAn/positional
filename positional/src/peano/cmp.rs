@@ -1,11 +1,4 @@
-use crate::{
-    bool::{Bool, False, True},
-    peano::{Successor, Zero},
-};
-
-pub trait Lt<T> {
-    type Lt: Bool;
-}
+use crate::{False, Lt, True, Zero, lt, peano::Successor};
 
 impl Lt<Zero> for Zero {
     type Lt = False;
@@ -26,15 +19,8 @@ where
     type Lt = <T1 as Lt<T2>>::Lt;
 }
 
-pub const fn lt<T1, T2>() -> bool
-where
-    T1: Lt<T2>,
-{
-    <T1 as Lt<T2>>::Lt::VALUE
-}
-
-pub(crate) trait NotLt<T>: Lt<T, Lt = False> {}
-pub(crate) trait IsLt<T>: Lt<T, Lt = True> {}
+pub(super) trait NotLt<T>: Lt<T, Lt = False> {}
+pub(super) trait IsLt<T>: Lt<T, Lt = True> {}
 
 impl<T1, T2> NotLt<T2> for T1 where T1: Lt<T2, Lt = False> {}
 impl<T1, T2> IsLt<T2> for T1 where T1: Lt<T2, Lt = True> {}
