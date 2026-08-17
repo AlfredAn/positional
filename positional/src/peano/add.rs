@@ -36,4 +36,5 @@ const _: () = const {
     assert!(equal::<Sum<p!(2), p!(0)>, p!(2)>());
     assert!(equal::<Sum<p!(2), p!(1)>, p!(3)>());
     assert!(equal::<Sum<p!(2), p!(2)>, p!(4)>());
+    assert!(equal::<Sum<p!(13), p!(37)>, p!(50)>());
 };

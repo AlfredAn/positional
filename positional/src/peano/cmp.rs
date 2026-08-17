@@ -50,4 +50,6 @@ const _: () = const {
     assert!(!lt::<p!(2), p!(0)>());
     assert!(!lt::<p!(2), p!(1)>());
     assert!(!lt::<p!(2), p!(2)>());
+    assert!(lt::<p!(30), p!(31)>());
+    assert!(!lt::<p!(30), p!(30)>());
 };

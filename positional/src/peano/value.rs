@@ -22,4 +22,5 @@ const _: () = const {
     assert!(<p!(2)>::VALUE == 2);
     assert!(<p!(3)>::VALUE == 3);
     assert!(<p!(4)>::VALUE == 4);
+    assert!(<p!(1000)>::VALUE == 1000);
 };
