@@ -1,4 +1,4 @@
-use crate::peano::{Four, One, Successor, Three, Two, Zero, eq::equal};
+use crate::peano::{Successor, Zero, eq::equal};
 
 pub trait Add<T> {
     type Sum;
@@ -26,13 +26,14 @@ where
 }
 
 const _: () = const {
-    assert!(equal::<Sum<Zero, Zero>, Zero>());
-    assert!(equal::<Sum<Zero, One>, One>());
-    assert!(equal::<Sum<Zero, Two>, Two>());
-    assert!(equal::<Sum<One, Zero>, One>());
-    assert!(equal::<Sum<One, One>, Two>());
-    assert!(equal::<Sum<One, Two>, Three>());
-    assert!(equal::<Sum<Two, Zero>, Two>());
-    assert!(equal::<Sum<Two, One>, Three>());
-    assert!(equal::<Sum<Two, Two>, Four>());
+    use positional_macro::peano as p;
+    assert!(equal::<Sum<p!(0), p!(0)>, p!(0)>());
+    assert!(equal::<Sum<p!(0), p!(1)>, p!(1)>());
+    assert!(equal::<Sum<p!(0), p!(2)>, p!(2)>());
+    assert!(equal::<Sum<p!(1), p!(0)>, p!(1)>());
+    assert!(equal::<Sum<p!(1), p!(1)>, p!(2)>());
+    assert!(equal::<Sum<p!(1), p!(2)>, p!(3)>());
+    assert!(equal::<Sum<p!(2), p!(0)>, p!(2)>());
+    assert!(equal::<Sum<p!(2), p!(1)>, p!(3)>());
+    assert!(equal::<Sum<p!(2), p!(2)>, p!(4)>());
 };

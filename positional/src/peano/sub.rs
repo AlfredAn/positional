@@ -1,4 +1,4 @@
-use crate::peano::{One, Successor, Two, Zero, eq::equal};
+use crate::peano::{Successor, Zero, eq::equal};
 
 pub trait Subtract<T> {
     type Difference;
@@ -22,10 +22,11 @@ where
 }
 
 const _: () = const {
-    assert!(equal::<Difference<Zero, Zero>, Zero>());
-    assert!(equal::<Difference<One, Zero>, One>());
-    assert!(equal::<Difference<One, One>, Zero>());
-    assert!(equal::<Difference<Two, Zero>, Two>());
-    assert!(equal::<Difference<Two, One>, One>());
-    assert!(equal::<Difference<Two, Two>, Zero>());
+    use positional_macro::peano as p;
+    assert!(equal::<Difference<p!(0), p!(0)>, p!(0)>());
+    assert!(equal::<Difference<p!(1), p!(0)>, p!(1)>());
+    assert!(equal::<Difference<p!(1), p!(1)>, p!(0)>());
+    assert!(equal::<Difference<p!(2), p!(0)>, p!(2)>());
+    assert!(equal::<Difference<p!(2), p!(1)>, p!(1)>());
+    assert!(equal::<Difference<p!(2), p!(2)>, p!(0)>());
 };

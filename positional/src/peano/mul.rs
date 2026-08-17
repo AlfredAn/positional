@@ -1,5 +1,5 @@
 use crate::peano::{
-    Four, One, Successor, Two, Zero,
+    Successor, Zero,
     add::{Add, Sum},
     eq::equal,
 };
@@ -31,13 +31,14 @@ where
 }
 
 const _: () = const {
-    assert!(equal::<Product<Zero, Zero>, Zero>());
-    assert!(equal::<Product<Zero, One>, Zero>());
-    assert!(equal::<Product<Zero, Two>, Zero>());
-    assert!(equal::<Product<One, Zero>, Zero>());
-    assert!(equal::<Product<One, One>, One>());
-    assert!(equal::<Product<One, Two>, Two>());
-    assert!(equal::<Product<Two, Zero>, Zero>());
-    assert!(equal::<Product<Two, One>, Two>());
-    assert!(equal::<Product<Two, Two>, Four>());
+    use positional_macro::peano as p;
+    assert!(equal::<Product<p!(0), p!(0)>, p!(0)>());
+    assert!(equal::<Product<p!(0), p!(1)>, p!(0)>());
+    assert!(equal::<Product<p!(0), p!(2)>, p!(0)>());
+    assert!(equal::<Product<p!(1), p!(0)>, p!(0)>());
+    assert!(equal::<Product<p!(1), p!(1)>, p!(1)>());
+    assert!(equal::<Product<p!(1), p!(2)>, p!(2)>());
+    assert!(equal::<Product<p!(2), p!(0)>, p!(0)>());
+    assert!(equal::<Product<p!(2), p!(1)>, p!(2)>());
+    assert!(equal::<Product<p!(2), p!(2)>, p!(4)>());
 };

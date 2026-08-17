@@ -1,4 +1,4 @@
-use crate::peano::{Four, One, Successor, Three, Two, Zero};
+use crate::peano::{Successor, Zero};
 
 pub trait Value {
     const VALUE: u64;
@@ -16,9 +16,10 @@ where
 }
 
 const _: () = const {
-    assert!(Zero::VALUE == 0);
-    assert!(One::VALUE == 1);
-    assert!(Two::VALUE == 2);
-    assert!(Three::VALUE == 3);
-    assert!(Four::VALUE == 4);
+    use positional_macro::peano as p;
+    assert!(<p!(0)>::VALUE == 0);
+    assert!(<p!(1)>::VALUE == 1);
+    assert!(<p!(2)>::VALUE == 2);
+    assert!(<p!(3)>::VALUE == 3);
+    assert!(<p!(4)>::VALUE == 4);
 };

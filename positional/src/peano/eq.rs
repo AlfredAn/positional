@@ -1,6 +1,6 @@
 use crate::{
     bool::{Bool, False, True},
-    peano::{One, Successor, Two, Zero},
+    peano::{Successor, Zero},
 };
 
 pub trait Equal<T> {
@@ -34,13 +34,14 @@ where
 }
 
 const _: () = const {
-    assert!(equal::<Zero, Zero>());
-    assert!(!equal::<Zero, One>());
-    assert!(!equal::<Zero, Two>());
-    assert!(!equal::<One, Zero>());
-    assert!(equal::<One, One>());
-    assert!(!equal::<One, Two>());
-    assert!(!equal::<Two, Zero>());
-    assert!(!equal::<Two, One>());
-    assert!(equal::<Two, Two>());
+    use positional_macro::peano as p;
+    assert!(equal::<p!(0), p!(0)>());
+    assert!(!equal::<p!(0), p!(1)>());
+    assert!(!equal::<p!(0), p!(2)>());
+    assert!(!equal::<p!(1), p!(0)>());
+    assert!(equal::<p!(1), p!(1)>());
+    assert!(!equal::<p!(1), p!(2)>());
+    assert!(!equal::<p!(2), p!(0)>());
+    assert!(!equal::<p!(2), p!(1)>());
+    assert!(equal::<p!(2), p!(2)>());
 };

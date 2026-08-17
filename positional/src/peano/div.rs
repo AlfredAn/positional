@@ -1,7 +1,7 @@
 use crate::{
     bool::{False, True},
     peano::{
-        Four, One, Successor, Three, Two, Zero,
+        Successor, Zero,
         cmp::{IsLt, Lt, NotLt},
         eq::equal,
         sub::{Difference, Subtract},
@@ -53,25 +53,27 @@ where
 }
 
 const _: () = const {
-    assert!(equal::<Quotient<Zero, One>, Zero>());
-    assert!(equal::<Quotient<Zero, Two>, Zero>());
-    assert!(equal::<Quotient<One, One>, One>());
-    assert!(equal::<Quotient<One, Two>, Zero>());
-    assert!(equal::<Quotient<Two, One>, Two>());
-    assert!(equal::<Quotient<Two, Two>, One>());
-    assert!(equal::<Quotient<Three, One>, Three>());
-    assert!(equal::<Quotient<Three, Two>, One>());
-    assert!(equal::<Quotient<Four, One>, Four>());
-    assert!(equal::<Quotient<Four, Two>, Two>());
+    use positional_macro::peano as p;
 
-    assert!(equal::<Remainder<Zero, One>, Zero>());
-    assert!(equal::<Remainder<Zero, Two>, Zero>());
-    assert!(equal::<Remainder<One, One>, Zero>());
-    assert!(equal::<Remainder<One, Two>, One>());
-    assert!(equal::<Remainder<Two, One>, Zero>());
-    assert!(equal::<Remainder<Two, Two>, Zero>());
-    assert!(equal::<Remainder<Three, One>, Zero>());
-    assert!(equal::<Remainder<Three, Two>, One>());
-    assert!(equal::<Remainder<Four, One>, Zero>());
-    assert!(equal::<Remainder<Four, Two>, Zero>());
+    assert!(equal::<Quotient<p!(0), p!(1)>, p!(0)>());
+    assert!(equal::<Quotient<p!(0), p!(2)>, p!(0)>());
+    assert!(equal::<Quotient<p!(1), p!(1)>, p!(1)>());
+    assert!(equal::<Quotient<p!(1), p!(2)>, p!(0)>());
+    assert!(equal::<Quotient<p!(2), p!(1)>, p!(2)>());
+    assert!(equal::<Quotient<p!(2), p!(2)>, p!(1)>());
+    assert!(equal::<Quotient<p!(3), p!(1)>, p!(3)>());
+    assert!(equal::<Quotient<p!(3), p!(2)>, p!(1)>());
+    assert!(equal::<Quotient<p!(4), p!(1)>, p!(4)>());
+    assert!(equal::<Quotient<p!(4), p!(2)>, p!(2)>());
+
+    assert!(equal::<Remainder<p!(0), p!(1)>, p!(0)>());
+    assert!(equal::<Remainder<p!(0), p!(2)>, p!(0)>());
+    assert!(equal::<Remainder<p!(1), p!(1)>, p!(0)>());
+    assert!(equal::<Remainder<p!(1), p!(2)>, p!(1)>());
+    assert!(equal::<Remainder<p!(2), p!(1)>, p!(0)>());
+    assert!(equal::<Remainder<p!(2), p!(2)>, p!(0)>());
+    assert!(equal::<Remainder<p!(3), p!(1)>, p!(0)>());
+    assert!(equal::<Remainder<p!(3), p!(2)>, p!(1)>());
+    assert!(equal::<Remainder<p!(4), p!(1)>, p!(0)>());
+    assert!(equal::<Remainder<p!(4), p!(2)>, p!(0)>());
 };

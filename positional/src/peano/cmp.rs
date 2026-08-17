@@ -1,6 +1,6 @@
 use crate::{
     bool::{Bool, False, True},
-    peano::{One, Successor, Two, Zero},
+    peano::{Successor, Zero},
 };
 
 pub trait Lt<T> {
@@ -40,13 +40,14 @@ impl<T1, T2> NotLt<T2> for T1 where T1: Lt<T2, Lt = False> {}
 impl<T1, T2> IsLt<T2> for T1 where T1: Lt<T2, Lt = True> {}
 
 const _: () = const {
-    assert!(!lt::<Zero, Zero>());
-    assert!(lt::<Zero, One>());
-    assert!(lt::<Zero, Two>());
-    assert!(!lt::<One, Zero>());
-    assert!(!lt::<One, One>());
-    assert!(lt::<One, Two>());
-    assert!(!lt::<Two, Zero>());
-    assert!(!lt::<Two, One>());
-    assert!(!lt::<Two, Two>());
+    use positional_macro::peano as p;
+    assert!(!lt::<p!(0), p!(0)>());
+    assert!(lt::<p!(0), p!(1)>());
+    assert!(lt::<p!(0), p!(2)>());
+    assert!(!lt::<p!(1), p!(0)>());
+    assert!(!lt::<p!(1), p!(1)>());
+    assert!(lt::<p!(1), p!(2)>());
+    assert!(!lt::<p!(2), p!(0)>());
+    assert!(!lt::<p!(2), p!(1)>());
+    assert!(!lt::<p!(2), p!(2)>());
 };
