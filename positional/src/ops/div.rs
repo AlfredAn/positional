@@ -48,7 +48,7 @@ where
 }
 
 const _: () = const {
-    use positional_macro::peano as p;
+    use peano as p;
 
     assert!(equal::<Quotient<p!(0), p!(1)>, p!(0)>());
     assert!(equal::<Quotient<p!(0), p!(2)>, p!(0)>());

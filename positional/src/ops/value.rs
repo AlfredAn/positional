@@ -33,7 +33,7 @@ where
 }
 
 const _: () = const {
-    use positional_macro::peano as p;
+    use peano as p;
     assert!(<p!(0)>::VALUE == 0);
     assert!(<p!(1)>::VALUE == 1);
     assert!(<p!(2)>::VALUE == 2);

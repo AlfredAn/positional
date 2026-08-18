@@ -22,7 +22,7 @@ where
 }
 
 const _: () = const {
-    use positional_macro::peano as p;
+    use peano as p;
     assert!(equal::<Difference<p!(0), p!(0)>, p!(0)>());
     assert!(equal::<Difference<p!(1), p!(0)>, p!(1)>());
     assert!(equal::<Difference<p!(1), p!(1)>, p!(0)>());

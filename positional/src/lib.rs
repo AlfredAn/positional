@@ -12,6 +12,7 @@ pub use bool::*;
 pub use ops::*;
 pub use peano::*;
 pub use pos::*;
+pub use positional_macro::*;
 pub use zero::*;
 
 pub mod prelude {
