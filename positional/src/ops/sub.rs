@@ -21,6 +21,7 @@ where
     type Difference = Difference<T1, T2>;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(equal::<Difference<p!(0), p!(0)>, p!(0)>());

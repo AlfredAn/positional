@@ -25,6 +25,7 @@ where
     type Sum = Sum<T1, PeanoSucc<PeanoSucc<T2>>>;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(equal::<Sum<p!(0), p!(0)>, p!(0)>());

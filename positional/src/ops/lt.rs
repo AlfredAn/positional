@@ -36,6 +36,7 @@ where
     type Lt = <T1 as Lt<T2>>::Lt;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(!lt::<p!(0), p!(0)>());

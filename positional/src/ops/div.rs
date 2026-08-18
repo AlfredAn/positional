@@ -47,6 +47,7 @@ where
     type Remainder = Remainder<Difference<T1, T2>, T2>;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
 

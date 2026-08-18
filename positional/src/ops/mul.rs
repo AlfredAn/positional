@@ -26,6 +26,7 @@ where
     type Product = Sum<Product<T1, PeanoSucc<T2>>, PeanoSucc<T2>>;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(equal::<Product<p!(0), p!(0)>, p!(0)>());

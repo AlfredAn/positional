@@ -32,6 +32,7 @@ where
     const VALUE: u64 = H::VALUE + R::VALUE * T::VALUE;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(<p!(0)>::VALUE == 0);

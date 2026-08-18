@@ -60,6 +60,7 @@ where
 
 impl<R, H, T> NormEqual<Seq<R, H, T>> for Term<R>
 where
+    R: Radix,
     Seq<R, H, T>: PosInt,
 {
     type Equal = False;
@@ -67,6 +68,7 @@ where
 
 impl<R, H, T> NormEqual<Term<R>> for Seq<R, H, T>
 where
+    R: Radix,
     Self: PosInt,
 {
     type Equal = False;
@@ -92,6 +94,7 @@ where
     type Equal = NormEq<Normalized<T1>, Normalized<T2>>;
 }
 
+#[cfg(test)]
 const _: () = const {
     use peano as p;
     assert!(equal::<p!(0), p!(0)>());

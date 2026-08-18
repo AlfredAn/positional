@@ -1,10 +1,14 @@
 use crate::prelude::*;
 
 /// Sequence terminator (represents zero)
-pub struct Term<R>(std::marker::PhantomData<R>);
+pub struct Term<R>(std::marker::PhantomData<R>)
+where
+    R: Radix;
 
 /// (Radix, Head, Tail)
-pub struct Seq<R, H, T>(std::marker::PhantomData<(R, H, T)>);
+pub struct Seq<R, H, T>(std::marker::PhantomData<(R, H, T)>)
+where
+    Self: PosInt;
 
 pub trait Radix: PeanoInt + NonZero {}
 
