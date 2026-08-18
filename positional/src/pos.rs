@@ -1,44 +1,63 @@
 use crate::prelude::*;
 
+/// Sequence terminator (represents zero)
+pub struct Term<R>(std::marker::PhantomData<R>);
+
 /// (Radix, Head, Tail)
-pub struct Int<R, H, T>(std::marker::PhantomData<(R, H, T)>);
+pub struct Seq<R, H, T>(std::marker::PhantomData<(R, H, T)>);
+
+pub trait Radix: PeanoInt + NonZero {}
+
+impl<R> Radix for R where R: PeanoInt + NonZero {}
 
 /// Positional integer
-pub trait PosInt {}
+pub trait PosInt {
+    type Radix: Radix;
+}
 
-impl PosInt for Zero {}
-
-impl<R, H, T> PosInt for Int<R, H, T>
+impl<R> PosInt for Term<R>
 where
-    R: PeanoInt + NonZero,
-    H: PeanoInt + IsLt<R>,
-    T: PosInt,
+    R: Radix,
 {
+    type Radix = R;
+}
+
+impl<R, H, T> PosInt for Seq<R, H, T>
+where
+    R: Radix,
+    H: PeanoInt + IsLt<R>,
+    T: PosInt<Radix = R>,
+{
+    type Radix = R;
 }
 
 /// Removes leading zeroes.
 pub trait Normalize: PosInt {
-    type Normalized: PosInt;
+    type Normalized: PosInt<Radix = Self::Radix>;
 }
 
-impl Normalize for Zero {
-    type Normalized = Zero;
+impl<R> Normalize for Term<R>
+where
+    R: Radix,
+{
+    type Normalized = Self;
 }
 
 pub type Normalized<T> = <T as Normalize>::Normalized;
 
-impl<R, T> Normalize for Int<R, Zero, T>
+impl<R, T> Normalize for Seq<R, PeanoZero, T>
 where
     Self: PosInt,
-    T: Normalize,
+    T: Normalize<Radix = Self::Radix>,
 {
     type Normalized = Normalized<T>;
 }
 
-impl<R, H, T> Normalize for Int<R, Successor<H>, T>
+impl<R, H, T> Normalize for Seq<R, Successor<H>, T>
 where
+    R: Radix,
     Self: PosInt,
-    T: PosInt,
+    T: PosInt<Radix = Self::Radix>,
 {
     type Normalized = Self;
 }

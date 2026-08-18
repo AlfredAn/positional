@@ -4,7 +4,7 @@ pub trait Value {
     const VALUE: u64;
 }
 
-impl Value for Zero {
+impl Value for PeanoZero {
     const VALUE: u64 = 0;
 }
 
@@ -15,7 +15,14 @@ where
     const VALUE: u64 = T::VALUE + 1;
 }
 
-impl<R, H, T> Value for Int<R, H, T>
+impl<R> Value for Term<R>
+where
+    R: Radix,
+{
+    const VALUE: u64 = 0;
+}
+
+impl<R, H, T> Value for Seq<R, H, T>
 where
     Self: PosInt,
     R: Value,

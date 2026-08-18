@@ -6,15 +6,15 @@ pub trait Add<T> {
 
 pub type Sum<T1, T2> = <T1 as Add<T2>>::Sum;
 
-impl Add<Zero> for Zero {
-    type Sum = Zero;
+impl Add<PeanoZero> for PeanoZero {
+    type Sum = PeanoZero;
 }
 
-impl<T> Add<Successor<T>> for Zero {
+impl<T> Add<Successor<T>> for PeanoZero {
     type Sum = Successor<T>;
 }
 
-impl<T> Add<Zero> for Successor<T> {
+impl<T> Add<PeanoZero> for Successor<T> {
     type Sum = Successor<T>;
 }
 

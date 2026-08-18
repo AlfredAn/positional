@@ -33,7 +33,7 @@ impl<T1, T2> Helper<True> for (T1, T2)
 where
     T1: IsLt<T2>,
 {
-    type Quotient = Zero;
+    type Quotient = PeanoZero;
     type Remainder = T1;
 }
 

@@ -19,11 +19,15 @@ where
     <Eq<T1, T2>>::VALUE
 }
 
-impl<T> Equal<Successor<T>> for Zero {
+impl Equal<PeanoZero> for PeanoZero {
+    type Equal = True;
+}
+
+impl<T> Equal<Successor<T>> for PeanoZero {
     type Equal = False;
 }
 
-impl<T> Equal<Zero> for Successor<T> {
+impl<T> Equal<PeanoZero> for Successor<T> {
     type Equal = False;
 }
 
@@ -47,28 +51,31 @@ use hidden::NormEqual;
 
 type NormEq<T1, T2> = <T1 as NormEqual<T2>>::Equal;
 
-impl NormEqual<Zero> for Zero {
+impl<R> NormEqual<Term<R>> for Term<R>
+where
+    R: Radix,
+{
     type Equal = True;
 }
 
-impl<R, H, T> NormEqual<Int<R, H, T>> for Zero
+impl<R, H, T> NormEqual<Seq<R, H, T>> for Term<R>
 where
-    Int<R, H, T>: PosInt,
+    Seq<R, H, T>: PosInt,
 {
     type Equal = False;
 }
 
-impl<R, H, T> NormEqual<Zero> for Int<R, H, T>
+impl<R, H, T> NormEqual<Term<R>> for Seq<R, H, T>
 where
     Self: PosInt,
 {
     type Equal = False;
 }
 
-impl<R, H1, H2, T1, T2> NormEqual<Int<R, H2, T2>> for Int<R, H1, T1>
+impl<R, H1, H2, T1, T2> NormEqual<Seq<R, H2, T2>> for Seq<R, H1, T1>
 where
     Self: PosInt,
-    Int<R, H2, T2>: PosInt,
+    Seq<R, H2, T2>: PosInt,
     H1: Equal<H2>,
     T1: NormEqual<T2>,
     Eq<H1, H2>: And<NormEq<T1, T2>>,

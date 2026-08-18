@@ -6,11 +6,11 @@ pub trait Subtract<T> {
 
 pub type Difference<T1, T2> = <T1 as Subtract<T2>>::Difference;
 
-impl Subtract<Zero> for Zero {
-    type Difference = Zero;
+impl Subtract<PeanoZero> for PeanoZero {
+    type Difference = PeanoZero;
 }
 
-impl<T> Subtract<Zero> for Successor<T> {
+impl<T> Subtract<PeanoZero> for Successor<T> {
     type Difference = Successor<T>;
 }
 

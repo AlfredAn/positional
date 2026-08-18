@@ -6,16 +6,16 @@ pub trait Multiply<T> {
 
 pub type Product<T1, T2> = <T1 as Multiply<T2>>::Product;
 
-impl Multiply<Zero> for Zero {
-    type Product = Zero;
+impl Multiply<PeanoZero> for PeanoZero {
+    type Product = PeanoZero;
 }
 
-impl<T> Multiply<Successor<T>> for Zero {
-    type Product = Zero;
+impl<T> Multiply<Successor<T>> for PeanoZero {
+    type Product = PeanoZero;
 }
 
-impl<T> Multiply<Zero> for Successor<T> {
-    type Product = Zero;
+impl<T> Multiply<PeanoZero> for Successor<T> {
+    type Product = PeanoZero;
 }
 
 impl<T1, T2> Multiply<Successor<T2>> for Successor<T1>

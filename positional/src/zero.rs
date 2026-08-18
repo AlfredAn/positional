@@ -2,22 +2,22 @@ use crate::prelude::*;
 
 pub trait IsZero {}
 
-impl IsZero for Zero {}
-
 pub trait NonZero {}
+
+impl IsZero for PeanoZero {}
 
 impl<T> NonZero for Successor<T> {}
 
-impl<R, T> IsZero for Int<R, Zero, T>
+impl<R, T> IsZero for Seq<R, PeanoZero, T>
 where
     Self: PosInt,
-    T: IsZero,
+    T: PosInt<Radix = R> + IsZero,
 {
 }
 
-impl<R, H, T> NonZero for Int<R, Successor<H>, T>
+impl<R, H, T> NonZero for Seq<R, Successor<H>, T>
 where
     Self: PosInt,
-    T: NonZero,
+    T: PosInt<Radix = R>,
 {
 }

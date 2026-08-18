@@ -17,15 +17,15 @@ where
     <T1 as Lt<T2>>::Lt::VALUE
 }
 
-impl Lt<Zero> for Zero {
+impl Lt<PeanoZero> for PeanoZero {
     type Lt = False;
 }
 
-impl<T> Lt<Successor<T>> for Zero {
+impl<T> Lt<Successor<T>> for PeanoZero {
     type Lt = True;
 }
 
-impl<T> Lt<Zero> for Successor<T> {
+impl<T> Lt<PeanoZero> for Successor<T> {
     type Lt = False;
 }
 
