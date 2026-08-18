@@ -10,6 +10,24 @@ pub struct Seq<R, H, T>(std::marker::PhantomData<(R, H, T)>)
 where
     Self: PosInt;
 
+impl<R> Default for Term<R>
+where
+    R: Radix,
+{
+    fn default() -> Self {
+        Self(std::marker::PhantomData)
+    }
+}
+
+impl<R, H, T> Default for Seq<R, H, T>
+where
+    Self: PosInt,
+{
+    fn default() -> Self {
+        Self(std::marker::PhantomData)
+    }
+}
+
 pub trait Radix: PeanoInt + NonZero {}
 
 impl<R> Radix for R where R: PeanoInt + NonZero {}

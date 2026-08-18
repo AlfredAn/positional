@@ -106,4 +106,14 @@ const _: () = const {
     assert!(!equal::<p!(2), p!(0)>());
     assert!(!equal::<p!(2), p!(1)>());
     assert!(equal::<p!(2), p!(2)>());
+
+    define_encoding!(bin, "01");
+    assert!(equal::<number!(bin, "0"), number!(bin, "0")>());
+    assert!(equal::<number!(bin, ""), number!(bin, "0")>());
+    assert!(equal::<number!(bin, "0"), number!(bin, "000")>());
+    assert!(!equal::<number!(bin, "0"), number!(bin, "1")>());
+    assert!(equal::<number!(bin, "1"), number!(bin, "01")>());
+    assert!(equal::<number!(bin, "10101001"), number!(bin, "10101001")>());
+    assert!(!equal::<number!(bin, "10101001"), number!(bin, "10101000")>());
+    assert!(equal::<number!(bin, "010101001"), number!(bin, "0010101001")>());
 };

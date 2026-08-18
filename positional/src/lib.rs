@@ -3,6 +3,7 @@
 extern crate self as positional;
 
 mod bool;
+mod fmt;
 mod ops;
 mod peano;
 mod pos;
@@ -17,4 +18,8 @@ pub use zero::*;
 
 pub mod prelude {
     pub use super::*;
+
+    #[cfg(test)]
+    #[allow(unused_imports)]
+    pub(crate) use fmt::debug;
 }
