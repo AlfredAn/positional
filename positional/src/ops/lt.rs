@@ -21,15 +21,15 @@ impl Lt<PeanoZero> for PeanoZero {
     type Lt = False;
 }
 
-impl<T> Lt<Successor<T>> for PeanoZero {
+impl<T> Lt<PeanoSucc<T>> for PeanoZero {
     type Lt = True;
 }
 
-impl<T> Lt<PeanoZero> for Successor<T> {
+impl<T> Lt<PeanoZero> for PeanoSucc<T> {
     type Lt = False;
 }
 
-impl<T1, T2> Lt<Successor<T2>> for Successor<T1>
+impl<T1, T2> Lt<PeanoSucc<T2>> for PeanoSucc<T1>
 where
     T1: Lt<T2>,
 {

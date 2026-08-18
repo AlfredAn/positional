@@ -10,20 +10,20 @@ impl Multiply<PeanoZero> for PeanoZero {
     type Product = PeanoZero;
 }
 
-impl<T> Multiply<Successor<T>> for PeanoZero {
+impl<T> Multiply<PeanoSucc<T>> for PeanoZero {
     type Product = PeanoZero;
 }
 
-impl<T> Multiply<PeanoZero> for Successor<T> {
+impl<T> Multiply<PeanoZero> for PeanoSucc<T> {
     type Product = PeanoZero;
 }
 
-impl<T1, T2> Multiply<Successor<T2>> for Successor<T1>
+impl<T1, T2> Multiply<PeanoSucc<T2>> for PeanoSucc<T1>
 where
-    T1: Multiply<Successor<T2>>,
-    Product<T1, Successor<T2>>: Add<Successor<T2>>,
+    T1: Multiply<PeanoSucc<T2>>,
+    Product<T1, PeanoSucc<T2>>: Add<PeanoSucc<T2>>,
 {
-    type Product = Sum<Product<T1, Successor<T2>>, Successor<T2>>;
+    type Product = Sum<Product<T1, PeanoSucc<T2>>, PeanoSucc<T2>>;
 }
 
 const _: () = const {

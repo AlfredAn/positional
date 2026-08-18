@@ -11,13 +11,13 @@ pub trait Divide<T> {
 pub type Quotient<T1, T2> = <T1 as Divide<T2>>::Quotient;
 pub type Remainder<T1, T2> = <T1 as Divide<T2>>::Remainder;
 
-impl<T1, T2> Divide<Successor<T2>> for T1
+impl<T1, T2> Divide<PeanoSucc<T2>> for T1
 where
-    T1: Lt<Successor<T2>>,
-    (T1, Successor<T2>): Helper<<T1 as Lt<Successor<T2>>>::Lt>,
+    T1: Lt<PeanoSucc<T2>>,
+    (T1, PeanoSucc<T2>): Helper<<T1 as Lt<PeanoSucc<T2>>>::Lt>,
 {
-    type Quotient = <(T1, Successor<T2>) as Helper<<T1 as Lt<Successor<T2>>>::Lt>>::Quotient;
-    type Remainder = <(T1, Successor<T2>) as Helper<<T1 as Lt<Successor<T2>>>::Lt>>::Remainder;
+    type Quotient = <(T1, PeanoSucc<T2>) as Helper<<T1 as Lt<PeanoSucc<T2>>>::Lt>>::Quotient;
+    type Remainder = <(T1, PeanoSucc<T2>) as Helper<<T1 as Lt<PeanoSucc<T2>>>::Lt>>::Remainder;
 }
 
 mod hidden {
@@ -43,7 +43,7 @@ where
     T1: Subtract<T2>,
     Difference<T1, T2>: Divide<T2>,
 {
-    type Quotient = Successor<Quotient<Difference<T1, T2>, T2>>;
+    type Quotient = PeanoSucc<Quotient<Difference<T1, T2>, T2>>;
     type Remainder = Remainder<Difference<T1, T2>, T2>;
 }
 

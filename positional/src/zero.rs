@@ -6,7 +6,7 @@ pub trait NonZero {}
 
 impl IsZero for PeanoZero {}
 
-impl<T> NonZero for Successor<T> {}
+impl<T> NonZero for PeanoSucc<T> {}
 
 impl<R, T> IsZero for Seq<R, PeanoZero, T>
 where
@@ -15,7 +15,7 @@ where
 {
 }
 
-impl<R, H, T> NonZero for Seq<R, Successor<H>, T>
+impl<R, H, T> NonZero for Seq<R, PeanoSucc<H>, T>
 where
     Self: PosInt,
     T: PosInt<Radix = R>,

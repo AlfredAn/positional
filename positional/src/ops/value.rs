@@ -8,7 +8,7 @@ impl Value for PeanoZero {
     const VALUE: u64 = 0;
 }
 
-impl<T> Value for Successor<T>
+impl<T> Value for PeanoSucc<T>
 where
     T: Value,
 {

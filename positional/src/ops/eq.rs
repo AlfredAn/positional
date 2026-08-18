@@ -23,15 +23,15 @@ impl Equal<PeanoZero> for PeanoZero {
     type Equal = True;
 }
 
-impl<T> Equal<Successor<T>> for PeanoZero {
+impl<T> Equal<PeanoSucc<T>> for PeanoZero {
     type Equal = False;
 }
 
-impl<T> Equal<PeanoZero> for Successor<T> {
+impl<T> Equal<PeanoZero> for PeanoSucc<T> {
     type Equal = False;
 }
 
-impl<T1, T2> Equal<Successor<T2>> for Successor<T1>
+impl<T1, T2> Equal<PeanoSucc<T2>> for PeanoSucc<T1>
 where
     T1: Equal<T2>,
 {

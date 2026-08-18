@@ -10,19 +10,19 @@ impl Add<PeanoZero> for PeanoZero {
     type Sum = PeanoZero;
 }
 
-impl<T> Add<Successor<T>> for PeanoZero {
-    type Sum = Successor<T>;
+impl<T> Add<PeanoSucc<T>> for PeanoZero {
+    type Sum = PeanoSucc<T>;
 }
 
-impl<T> Add<PeanoZero> for Successor<T> {
-    type Sum = Successor<T>;
+impl<T> Add<PeanoZero> for PeanoSucc<T> {
+    type Sum = PeanoSucc<T>;
 }
 
-impl<T1, T2> Add<Successor<T2>> for Successor<T1>
+impl<T1, T2> Add<PeanoSucc<T2>> for PeanoSucc<T1>
 where
-    T1: Add<Successor<Successor<T2>>>,
+    T1: Add<PeanoSucc<PeanoSucc<T2>>>,
 {
-    type Sum = Sum<T1, Successor<Successor<T2>>>;
+    type Sum = Sum<T1, PeanoSucc<PeanoSucc<T2>>>;
 }
 
 const _: () = const {

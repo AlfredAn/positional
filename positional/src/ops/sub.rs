@@ -10,11 +10,11 @@ impl Subtract<PeanoZero> for PeanoZero {
     type Difference = PeanoZero;
 }
 
-impl<T> Subtract<PeanoZero> for Successor<T> {
-    type Difference = Successor<T>;
+impl<T> Subtract<PeanoZero> for PeanoSucc<T> {
+    type Difference = PeanoSucc<T>;
 }
 
-impl<T1, T2> Subtract<Successor<T2>> for Successor<T1>
+impl<T1, T2> Subtract<PeanoSucc<T2>> for PeanoSucc<T1>
 where
     T1: Subtract<T2>,
 {

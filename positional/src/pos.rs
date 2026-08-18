@@ -53,7 +53,7 @@ where
     type Normalized = Normalized<T>;
 }
 
-impl<R, H, T> Normalize for Seq<R, Successor<H>, T>
+impl<R, H, T> Normalize for Seq<R, PeanoSucc<H>, T>
 where
     R: Radix,
     Self: PosInt,

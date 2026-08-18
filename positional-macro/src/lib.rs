@@ -26,7 +26,7 @@ fn peano_type(n: u16) -> TokenStream {
 
     for _ in 0..n {
         res = quote! {
-            ::positional::Successor<#res>
+            ::positional::PeanoSucc<#res>
         };
     }
 
