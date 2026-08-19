@@ -6,6 +6,10 @@ where
     R: Radix;
 
 /// (Radix, Head, Tail)
+///
+/// Head is the least significant digit.
+///
+/// Tail is the rest of the digits.
 pub struct Seq<R, H, T>(std::marker::PhantomData<(R, H, T)>)
 where
     Self: PosInt;
@@ -83,3 +87,54 @@ where
 {
     type Normalized = Self;
 }
+
+// /// Zeroes all digits of a number.
+// trait MakeZeroed: PosInt {
+//     type Zeroed: PosInt<Radix = Self::Radix>;
+// }
+
+// type Zeroed<T> = <T as MakeZeroed>::Zeroed;
+
+// impl<R> MakeZeroed for Term<R>
+// where
+//     R: Radix,
+// {
+//     type Zeroed = Term<R>;
+// }
+
+// impl<R, H, T> MakeZeroed for Seq<R, H, T>
+// where
+//     R: Radix,
+//     Self: PosInt<Radix = R>,
+//     T: PosInt<Radix = R> + MakeZeroed,
+//     PeanoZero: IsLt<R>,
+// {
+//     type Zeroed = Seq<R, PeanoZero, Zeroed<T>>;
+// }
+
+// /// Pads the shorter of two numbers with zeroes to make them the same length.
+// pub trait SameLength<T>: PosInt
+// where
+//     T: PosInt<Radix = Self::Radix>,
+// {
+//     type This: PosInt<Radix = Self::Radix>;
+//     type Other: PosInt<Radix = Self::Radix>;
+// }
+
+// impl<R> SameLength<Term<R>> for Term<R>
+// where
+//     R: Radix,
+// {
+//     type This = Term<R>;
+//     type Other = Term<R>;
+// }
+
+// impl<R, H, T> SameLength<Seq<R, H, T>> for Term<R>
+// where
+//     R: Radix,
+//     Seq<R, H, T>: PosInt<Radix = R>,
+// {
+//     type This = Zeroed<Seq<R, H, T>>;
+//     type Other = Seq<R, H, T>;
+// }
+// wrap one step at a time maybe?

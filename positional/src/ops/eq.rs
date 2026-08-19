@@ -38,60 +38,56 @@ where
     type Equal = Eq<T1, T2>;
 }
 
-mod hidden {
-    use crate::Bool;
-
-    /// Only works for normalized positional integers.
-    pub trait NormEqual<T> {
-        type Equal: Bool;
-    }
-}
-
-use hidden::NormEqual;
-
-type NormEq<T1, T2> = <T1 as NormEqual<T2>>::Equal;
-
-impl<R> NormEqual<Term<R>> for Term<R>
+impl<R> Equal<Term<R>> for Term<R>
 where
     R: Radix,
 {
     type Equal = True;
 }
 
-impl<R, H, T> NormEqual<Seq<R, H, T>> for Term<R>
+impl<R, T> Equal<Seq<R, PeanoZero, T>> for Term<R>
 where
+    Seq<R, PeanoZero, T>: PosInt,
     R: Radix,
-    Seq<R, H, T>: PosInt,
+    Term<R>: Equal<T>,
+{
+    type Equal = Eq<Term<R>, T>;
+}
+
+impl<R, T> Equal<Term<R>> for Seq<R, PeanoZero, T>
+where
+    Seq<R, PeanoZero, T>: PosInt,
+    R: Radix,
+    T: Equal<Term<R>>,
+{
+    type Equal = Eq<T, Term<R>>;
+}
+
+impl<R, H, T> Equal<Seq<R, PeanoSucc<H>, T>> for Term<R>
+where
+    Seq<R, PeanoSucc<H>, T>: PosInt,
+    R: Radix,
 {
     type Equal = False;
 }
 
-impl<R, H, T> NormEqual<Term<R>> for Seq<R, H, T>
+impl<R, H, T> Equal<Term<R>> for Seq<R, PeanoSucc<H>, T>
 where
+    Seq<R, PeanoSucc<H>, T>: PosInt,
     R: Radix,
-    Self: PosInt,
 {
     type Equal = False;
 }
 
-impl<R, H1, H2, T1, T2> NormEqual<Seq<R, H2, T2>> for Seq<R, H1, T1>
+impl<R, H1, H2, T1, T2> Equal<Seq<R, H2, T2>> for Seq<R, H1, T1>
 where
-    Self: PosInt,
+    Seq<R, H1, T1>: PosInt,
     Seq<R, H2, T2>: PosInt,
     H1: Equal<H2>,
-    T1: NormEqual<T2>,
-    Eq<H1, H2>: And<NormEq<T1, T2>>,
+    T1: Equal<T2>,
+    Eq<H1, H2>: And<Eq<T1, T2>>,
 {
-    type Equal = Both<Eq<H1, H2>, NormEq<T1, T2>>;
-}
-
-impl<T1, T2> Equal<T2> for T1
-where
-    T1: Normalize,
-    T2: Normalize,
-    T1::Normalized: NormEqual<T2::Normalized>,
-{
-    type Equal = NormEq<Normalized<T1>, Normalized<T2>>;
+    type Equal = Both<Eq<H1, H2>, Eq<T1, T2>>;
 }
 
 #[cfg(test)]

@@ -126,7 +126,7 @@ fn number_impl(input: NumberInput) -> TokenStream {
 
     let mut res = quote!(::positional::Term<#encoding::Radix>);
 
-    for c in input.digits.value().chars().rev() {
+    for c in input.digits.value().chars() {
         let digit = char_ident(c);
         res = quote! {
             ::positional::Seq<

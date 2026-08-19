@@ -15,27 +15,6 @@ where
     const VALUE: u64 = T::VALUE + 1;
 }
 
-trait DigitValue {
-    const DIGIT_VALUE: u64;
-}
-
-impl<R, H> DigitValue for Seq<R, H, Term<R>>
-where
-    Self: PosInt,
-    R: Radix,
-{
-    const DIGIT_VALUE: u64 = 1;
-}
-
-impl<R, H, T> DigitValue for Seq<R, H, T>
-where
-    Self: PosInt,
-    R: Value,
-    T: DigitValue,
-{
-    const DIGIT_VALUE: u64 = R::VALUE * T::DIGIT_VALUE;
-}
-
 impl<R> Value for Term<R>
 where
     R: Radix,
@@ -45,11 +24,12 @@ where
 
 impl<R, H, T> Value for Seq<R, H, T>
 where
-    Self: PosInt + DigitValue,
+    Self: PosInt,
+    R: Value,
     H: Value,
     T: Value,
 {
-    const VALUE: u64 = H::VALUE * Self::DIGIT_VALUE + T::VALUE;
+    const VALUE: u64 = H::VALUE + R::VALUE * T::VALUE;
 }
 
 #[cfg(test)]
