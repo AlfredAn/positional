@@ -9,6 +9,7 @@ impl<T> Default for PeanoSucc<T> {
     }
 }
 
+/// This trait can be used to assert that a type is a valid peano integer.
 pub trait PeanoInt {}
 
 impl PeanoInt for PeanoZero {}

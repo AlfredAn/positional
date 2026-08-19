@@ -15,16 +15,12 @@ where
     const VALUE: u64 = T::VALUE + 1;
 }
 
-impl<R> Value for Term<R>
-where
-    R: Radix,
-{
+impl<R> Value for Term<R> {
     const VALUE: u64 = 0;
 }
 
 impl<R, H, T> Value for Seq<R, H, T>
 where
-    Self: PosInt,
     R: Value,
     H: Value,
     T: Value,

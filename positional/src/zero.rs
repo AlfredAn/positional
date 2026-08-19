@@ -8,16 +8,8 @@ impl IsZero for PeanoZero {}
 
 impl<T> NonZero for PeanoSucc<T> {}
 
-impl<R, T> IsZero for Seq<R, PeanoZero, T>
-where
-    Self: PosInt,
-    T: PosInt<Radix = R> + IsZero,
-{
-}
+impl<R, T> IsZero for Seq<R, PeanoZero, T> where T: IsZero {}
 
-impl<R, H, T> NonZero for Seq<R, PeanoSucc<H>, T>
-where
-    Self: PosInt,
-    T: PosInt<Radix = R>,
-{
-}
+impl<R, T> NonZero for Seq<R, PeanoZero, T> where T: NonZero {}
+
+impl<R, H, T> NonZero for Seq<R, PeanoSucc<H>, T> {}

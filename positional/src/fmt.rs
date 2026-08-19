@@ -39,7 +39,7 @@ impl<T> Default for DebugInner<T> {
 
 impl<R> Debug for DebugInner<Term<R>>
 where
-    R: Radix,
+    Term<R>: PosInt,
 {
     fn fmt(&self, f: &mut Formatter) -> Result {
         f.debug_struct("Term").finish()
@@ -57,6 +57,16 @@ where
             .field(&H::VALUE)
             .field(&DebugInner::<T>::default())
             .finish()
+    }
+}
+
+impl<R> Debug for Term<R>
+where
+    Self: PosInt,
+    R: Value,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        f.debug_tuple("Term").field(&R::VALUE).finish()
     }
 }
 

@@ -38,17 +38,12 @@ where
     type Equal = Eq<T1, T2>;
 }
 
-impl<R> Equal<Term<R>> for Term<R>
-where
-    R: Radix,
-{
+impl<R> Equal<Term<R>> for Term<R> {
     type Equal = True;
 }
 
 impl<R, T> Equal<Seq<R, PeanoZero, T>> for Term<R>
 where
-    Seq<R, PeanoZero, T>: PosInt,
-    R: Radix,
     Term<R>: Equal<T>,
 {
     type Equal = Eq<Term<R>, T>;
@@ -56,33 +51,21 @@ where
 
 impl<R, T> Equal<Term<R>> for Seq<R, PeanoZero, T>
 where
-    Seq<R, PeanoZero, T>: PosInt,
-    R: Radix,
     T: Equal<Term<R>>,
 {
     type Equal = Eq<T, Term<R>>;
 }
 
-impl<R, H, T> Equal<Seq<R, PeanoSucc<H>, T>> for Term<R>
-where
-    Seq<R, PeanoSucc<H>, T>: PosInt,
-    R: Radix,
-{
+impl<R, H, T> Equal<Seq<R, PeanoSucc<H>, T>> for Term<R> {
     type Equal = False;
 }
 
-impl<R, H, T> Equal<Term<R>> for Seq<R, PeanoSucc<H>, T>
-where
-    Seq<R, PeanoSucc<H>, T>: PosInt,
-    R: Radix,
-{
+impl<R, H, T> Equal<Term<R>> for Seq<R, PeanoSucc<H>, T> {
     type Equal = False;
 }
 
 impl<R, H1, H2, T1, T2> Equal<Seq<R, H2, T2>> for Seq<R, H1, T1>
 where
-    Seq<R, H1, T1>: PosInt,
-    Seq<R, H2, T2>: PosInt,
     H1: Equal<H2>,
     T1: Equal<T2>,
     Eq<H1, H2>: And<Eq<T1, T2>>,
@@ -105,6 +88,7 @@ const _: () = const {
 
     define_encoding!(bin, "01");
     assert!(equal::<number!(bin, "0"), number!(bin, "0")>());
+    assert!(equal::<number!(bin, ""), number!(bin, "")>());
     assert!(equal::<number!(bin, ""), number!(bin, "0")>());
     assert!(equal::<number!(bin, "0"), number!(bin, "000")>());
     assert!(!equal::<number!(bin, "0"), number!(bin, "1")>());
